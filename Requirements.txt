@@ -1,24 +1,24 @@
-# Core
+# Core data analysis libraries
 pandas>=1.5.0
 numpy>=1.21.0
-scikit-learn>=1.1.0
-scipy>=1.9.0
-
-# Ordinal regression
-mord>=0.7
-
-# Visualization
 matplotlib>=3.5.0
 seaborn>=0.11.0
+
+# Interactive visualizations
 plotly>=5.0.0
 
-# Data loading
+# Dataset loading
 datasets>=2.0.0
 huggingface-hub>=0.10.0
 
-# Notebooks
+# Jupyter notebook
 jupyter>=1.0.0
 ipykernel>=6.0.0
 
-# Utilities
+# Additional useful libraries
+scikit-learn>=1.1.0
+scipy>=1.9.0
 tqdm>=4.64.0
+
+# Optional: for better performance
+numba>=0.56.0
