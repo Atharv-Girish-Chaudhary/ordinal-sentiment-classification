@@ -1,44 +1,51 @@
 # Python
 __pycache__/
 *.py[cod]
-*$py.class
 *.so
+*.egg-info/
+dist/
+build/
+*.egg
 
-# Virtual Environments
+# Virtual environments
 .env
 .venv
-venv/
-ENV/
 env/
+venv/
 
-# Jupyter Notebook
+# Jupyter
 .ipynb_checkpoints/
-*.ipynb_checkpoints
 
 # IDE
 .vscode/
 .idea/
 *.swp
-*.swo
 *~
 
 # OS
 .DS_Store
 Thumbs.db
 
-# Data files (large raw datasets)
-data/*.json.gz
-*.json.gz
-# Note: data/*.csv is allowed (cleaned/processed data can be committed)
+# Data files (too large for git)
+data/raw/*.json*
+data/raw/*.jsonl*
+data/raw/*.gz
+data/processed/*.csv
+data/processed/*.pkl
 
-# Results (generated outputs - uncomment if you don't want to commit results)
-# results/
+# Generated outputs (reproducible from notebooks)
+results/figures/*.png
+results/figures/*.jpg
+results/figures/*.svg
+results/tables/*.csv
 
-# Logs
+# Model artifacts
+*.pkl
+*.joblib
+*.model
+
+# Misc
 *.log
-
-# Cache
-.cache/
-.pytest_cache/
-.mypy_cache/
-.ruff_cache/
+*.tmp
+*.zip
+*.tar.gz

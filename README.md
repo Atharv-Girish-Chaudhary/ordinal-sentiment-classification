@@ -1,74 +1,159 @@
-# Ordinal Sentiment Classification
+# Ordinal vs Nominal Sentiment Classification
 
-A machine learning project comparing nominal and ordinal encoding approaches for sentiment classification on Amazon electronics reviews.
+**CS 5100 — Foundations of Artificial Intelligence | Northeastern University**
 
-## Project Overview
+A comparative study of ordinal and nominal encoding approaches for 5-star sentiment classification on Amazon Electronics reviews. We show that ordinal methods — particularly Ridge Regression — reduce severe misclassifications by **48%** compared to nominal classifiers, even when nominal models achieve higher exact-match accuracy.
 
-This project explores the effectiveness of treating sentiment classification as an ordinal problem versus a nominal classification problem. The study uses Amazon electronics review data and compares various machine learning models under both encoding schemes.
+**Authors:** Atharv Chaudhary, Kien Nguyen, Zijie Liu
+
+---
+
+## Key Results
+
+| Model | Approach | Accuracy | MAE | Severe Error Rate |
+|:------|:---------|:--------:|:---:|:-----------------:|
+| Multinomial Naive Bayes | Nominal | 63.12% | 0.665 | 44.37% |
+| Logistic Regression | Nominal | **65.95%** | **0.534** | 34.83% |
+| Ridge Regression | Ordinal | 50.29% | 0.606 | **18.08%** |
+| Ordinal Logistic Regression | Ordinal | 65.86% | 0.536 | 34.74% |
+
+**Core finding:** When misclassification cost depends on distance (confusing 1★ with 5★ is worse than 4★ with 5★), ordinal encoding significantly outperforms nominal encoding on the metric that matters most.
+
+---
+
+## Research Question
+
+> Do ordinal approaches to 5-star rating prediction reduce severe misclassifications compared to nominal approaches, and does this justify the trade-off in exact-match accuracy?
+
+---
+
+## Dataset
+
+- **Source:** [Amazon Reviews 2023](https://amazon-reviews-2023.github.io/) — McAuley Lab, UCSD
+- **Category:** Electronics
+- **Samples:** 49,960 reviews after cleaning
+- **Class distribution:** Heavily imbalanced (5★: 61.8%, 4★: 17.3%, 3★: 7.2%, 2★: 4.3%, 1★: 5.7%)
+- **Features:** TF-IDF vectors (5,000 features, unigrams + bigrams)
+
+---
 
 ## Project Structure
 
 ```
 ordinal-sentiment-classification/
-├── data/                          # Dataset files
-│   ├── electronics.json.gz       # Raw Amazon electronics reviews dataset
-│   └── amazon_electronics_cleaned.csv  # Processed and cleaned dataset
 │
-├── docs/                          # Documentation and reports
-│   ├── IEEE_Report_Full.pdf      # Full IEEE format research report
-│   ├── Final_Project_Presentation.pptx  # Project presentation slides
-│   └── *.pdf                     # Additional reference documents
+├── README.md
+├── requirements.txt
+├── .gitignore
 │
-├── notebooks/                     # Jupyter notebooks for analysis
-│   ├── 1_Data_Loading.ipynb      # Data loading and preprocessing
-│   ├── 2_EDA_Visualization.ipynb # Exploratory data analysis and visualizations
-│   ├── 3_Models_Nominal.ipynb    # Nominal classification models
-│   ├── 4_Models_Ordinal.ipynb    # Ordinal classification models
-│   ├── 5_Results_Analysis.ipynb  # Comprehensive results analysis
-│   └── 6_Additional_Visualizations.ipynb  # Additional visualizations
+├── notebooks/                              # Run these in order
+│   ├── 1_Data_Loading.ipynb                # Load and preprocess reviews
+│   ├── 2_EDA_Visualization.ipynb           # Exploratory data analysis
+│   ├── 3_Models_Nominal.ipynb              # Naive Bayes + Logistic Regression
+│   ├── 4_Models_Ordinal.ipynb              # Ridge Regression + Ordinal Logistic
+│   ├── 5_Results_Analysis.ipynb            # Compare all models
+│   ├── 6_Additional_Visualizations.ipynb   # Publication-quality figures
+│   └── path_config.py                      # Shared path configuration
 │
-└── results/                       # Generated results and outputs
-    ├── figures/                  # Visualization figures
-    │   ├── confusion_matrices_*.png
-    │   ├── model_comparison*.png
-    │   ├── ordinal_vs_nominal.png
-    │   └── fig_*.png             # Publication-ready figures
-    └── tables/                   # Results tables
-        ├── final_results_table.csv
-        ├── nominal_results.csv
-        ├── ordinal_results.csv
-        └── *_predictions.csv
+├── data/
+│   ├── raw/                                # Original dataset (.json.gz / .jsonl.gz)
+│   └── processed/                          # Cleaned CSV after preprocessing
+│
+├── results/
+│   ├── figures/                            # Confusion matrices, comparisons, etc.
+│   └── tables/                             # CSV result tables
+│
+└── docs/
+    ├── IEEE_Report_Full.pdf                # Full research report
+    ├── Final_Project_Presentation.pptx     # Slide deck
+    └── Video_Script.md                     # Presentation script
 ```
 
-## Getting Started
+---
 
-### Prerequisites
+## Quick Start
 
-- Python 3.7+
-- Jupyter Notebook
-- Required Python packages (install via `pip install -r requirements.txt` if available)
+### 1. Clone and install
 
-### Usage
+```bash
+git clone https://github.com/Atharv-Girish-Chaudhary/ordinal-sentiment-classification.git
+cd ordinal-sentiment-classification
+pip install -r requirements.txt
+```
 
-1. **Data Loading**: Start with `1_Data_Loading.ipynb` to load and preprocess the dataset
-2. **Exploratory Analysis**: Run `2_EDA_Visualization.ipynb` to explore the data
-3. **Model Training**: 
-   - Run `3_Models_Nominal.ipynb` for nominal classification models
-   - Run `4_Models_Ordinal.ipynb` for ordinal classification models
-4. **Results Analysis**: Execute `5_Results_Analysis.ipynb` for comprehensive results comparison
-5. **Additional Visualizations**: Use `6_Additional_Visualizations.ipynb` for extra figures
+### 2. Run notebooks in sequence
+
+```bash
+jupyter notebook notebooks/
+```
+
+Execute `1_Data_Loading.ipynb` through `6_Additional_Visualizations.ipynb` in order. Each notebook saves its outputs to `data/processed/`, `results/figures/`, or `results/tables/` for downstream notebooks to consume.
+
+### 3. Or download the dataset manually
+
+The data loading notebook fetches from Hugging Face. If that fails, download from [McAuley Lab](https://amazon-reviews-2023.github.io/) and place the `.json.gz` file in `data/raw/`.
+
+---
+
+## Methodology
+
+We compare four models — two nominal, two ordinal — all trained on the same TF-IDF features:
+
+**Nominal (treat ratings as unordered categories):**
+- **Multinomial Naive Bayes** — generative baseline using Bayes' theorem with Laplace smoothing
+- **Logistic Regression** — discriminative classifier with softmax and cross-entropy loss
+
+**Ordinal (respect the 1 < 2 < 3 < 4 < 5 ordering):**
+- **Ridge Regression** — treats ratings as continuous, minimizes squared error (distant errors penalized quadratically), predictions rounded to nearest integer
+- **Ordinal Logistic Regression** — learns cumulative probability thresholds via the `mord` library
+
+We introduce a **severe error rate** metric: the percentage of predictions that differ from the true rating by 3+ classes (e.g., predicting 1★ for a 5★ review).
+
+---
 
 ## Key Findings
 
-Results comparing nominal vs ordinal approaches are available in:
-- `results/tables/final_results_table.csv` - Summary of all model performances
-- `results/figures/` - Visual comparisons and analysis plots
+1. **48% reduction in severe errors** — Ridge Regression achieves 18.1% severe error rate vs. ~39.6% average for nominal methods
+2. **Accuracy vs. safety trade-off** — Ridge Regression sacrifices exact-match accuracy (50.3% vs. 66.0%) but concentrates errors near the diagonal
+3. **Class imbalance hurts everyone** — all models achieve F1 < 0.30 on 2★ and 3★ minority classes
+4. **Squared error loss is key** — the quadratic penalty in Ridge (cost of 16 for a 4-class error vs. 1 for a 1-class error) drives the severe error reduction more than ordinal thresholds alone
 
-## Documentation
+---
 
-- Full research report: `docs/IEEE_Report_Full.pdf`
-- Project presentation: `docs/Final_Project_Presentation.pptx`
+## Future Work
+
+- Address class imbalance via SMOTE, class weighting, or cost-sensitive learning
+- Combine deep learning (LSTM, BERT) with ordinal loss functions
+- Evaluate generalizability on other domains (hotels, restaurants, movies)
+- Hyperparameter tuning to find the accuracy–severity Pareto frontier
+
+---
+
+## Tech Stack
+
+- **Python 3.8+**, NumPy, Pandas, Scikit-learn
+- **mord** — ordinal regression models
+- **Matplotlib, Seaborn, Plotly** — visualization
+- **Hugging Face Datasets** — data loading
+- **Jupyter Notebook** — reproducible analysis
+
+---
+
+## Citation
+
+If you use this work or the dataset:
+
+```bibtex
+@article{hou2024bridging,
+  title={Bridging Language and Items for Retrieval and Recommendation},
+  author={Hou, Yupeng and Li, Jiacheng and He, Zhankui and Yan, An and Chen, Xiusi and McAuley, Julian},
+  journal={arXiv preprint arXiv:2403.03952},
+  year={2024}
+}
+```
+
+---
 
 ## License
 
-See [LICENSE](LICENSE) file for details.
+This project is for educational and research purposes. See the [original dataset license](https://amazon-reviews-2023.github.io/) for data usage terms.
