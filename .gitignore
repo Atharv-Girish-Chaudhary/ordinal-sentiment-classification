@@ -131,11 +131,9 @@ dmypy.json
 # Data files (keep structure, ignore large files)
 data/raw/*.json*
 data/raw/*.jsonl*
-data/raw/*.gz
+data/**/*.gz
 data/*.csv
 data/raw/*.csv
-data/processed/*.csv
-data/processed/*.pkl
 
 # Large dataset files
 datasets/
@@ -145,10 +143,11 @@ raw_data/
 *.model
 *.pkl
 *.joblib
+*.pth
+*.pt
+*.ckpt
 models/
 
-# Output files (keep structure, ignore generated files)
-results/figures/*.gif
 
 # Documentation (keep structure, ignore PDFs)
 docs/*.pdf
@@ -204,14 +203,10 @@ yarn-error.log*
 *.7z
 
 # Dataset files
-electronics.json.gz
 
 # Specific to this project
-# Uncomment if you want to ignore the archive folder
-# archive/
 
 # Keep important files
 !README.md
 !.gitignore
 !requirements.txt
-!setup.py
