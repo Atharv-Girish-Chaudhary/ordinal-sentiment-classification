@@ -42,11 +42,6 @@ pip install pandas numpy matplotlib seaborn plotly datasets jupyter
    - `5_Results_Analysis.ipynb` - Compare and analyze results
    - `6_Additional_Visualizations.ipynb` - Generate publication figures
 
-3. **Alternative**: Use the complete notebook:
-   ```bash
-   jupyter notebook notebooks/Atharv_Final_Project_Complete.ipynb
-   ```
-
 ## 🔬 Research Question
 
 **Do the performance gains from ordinal treatment of 5-star ratings justify the increased model complexity?**
@@ -89,7 +84,6 @@ pip install pandas numpy matplotlib seaborn plotly datasets jupyter
 │   ├── 4_Models_Ordinal.ipynb        # Ordinal classification models
 │   ├── 5_Results_Analysis.ipynb      # Results comparison and analysis
 │   ├── 6_Additional_Visualizations.ipynb  # Publication-quality figures
-│   ├── Atharv_Final_Project_Complete.ipynb  # Complete standalone notebook
 │   ├── path_config.py                # Path configuration helper
 │   └── archive/                      # Archived/experimental notebooks
 │
