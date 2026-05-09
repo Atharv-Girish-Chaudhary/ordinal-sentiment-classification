@@ -132,6 +132,8 @@ dmypy.json
 data/raw/*.json*
 data/raw/*.jsonl*
 data/raw/*.gz
+data/*.csv
+data/raw/*.csv
 data/processed/*.csv
 data/processed/*.pkl
 
