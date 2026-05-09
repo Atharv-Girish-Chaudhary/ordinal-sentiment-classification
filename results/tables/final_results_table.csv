@@ -1,5 +1,5 @@
 Model,Encoding,Accuracy,MAE,F1 Macro,Adj. Error,Severe Error
-Naive Bayes,Nominal,63.74%,0.6373,0.2588,57.1%,42.9%
-Logistic Regression,Nominal,65.53%,0.5341,0.3660,66.3%,33.7%
-Ridge Regression,Ordinal,51.25%,0.5935,0.3198,81.8%,18.2%
-Ordinal Logistic Regression,Ordinal,65.51%,0.5359,0.3623,66.4%,33.6%
+Naive Bayes,Nominal,63.14%,0.6646,0.2322,55.6%,44.4%
+Logistic Regression,Nominal,66.10%,0.5315,0.3816,65.2%,34.8%
+Ridge Regression,Ordinal,50.34%,0.6051,0.3077,81.9%,18.1%
+Ordinal Logistic Regression,Ordinal,65.85%,0.5359,0.3713,65.2%,34.8%

@@ -12,9 +12,9 @@ When a 1-star review is misclassified, the *type* of error matters. Predicting
 it as 2 stars is much less wrong than predicting 5 stars. The ordinal models
 exploit this directly.
 
-- Best top-line accuracy: **Logistic Regression (Nominal)** at 65.53%, MAE 0.5341.
-- Best severe-error rate: **Ridge Regression (Ordinal)** at 18.2% — roughly half
-  the rate of the nominal classifiers (33–43%), at the cost of about 14
+- Best top-line accuracy: **Logistic Regression (Nominal)** at 66.10%, MAE 0.5315.
+- Best severe-error rate: **Ridge Regression (Ordinal)** at 18.1% — roughly half
+  the rate of the nominal classifiers (35–44%), at the cost of about 16
   accuracy points.
 
 Ordinal models trade raw accuracy for substantially safer mistakes.
@@ -33,7 +33,7 @@ Stanford SNAP **Amazon Reviews — Electronics 5-core**
 The pipeline reads the first 50,000 records (`SAMPLE_SIZE = 50000` in
 `1_Data_Loading.ipynb`), reduces to `(text, rating)`, drops reviews shorter
 than 10 characters or with rating outside [1, 5], and saves the cleaned set
-of 49,953 reviews to `data/amazon_electronics_cleaned.csv`.
+of 49,961 reviews to `data/amazon_electronics_cleaned.csv`.
 
 ## Models
 
@@ -51,10 +51,10 @@ Ordinal (ratings treated as ordered values):
 
 | Model | Encoding | Accuracy | MAE | F1 Macro | Severe Error |
 |---|---|---:|---:|---:|---:|
-| Naive Bayes | Nominal | 63.74% | 0.637 | 0.259 | 42.9% |
-| Logistic Regression | Nominal | **65.53%** | **0.534** | 0.366 | 33.7% |
-| Ridge Regression | Ordinal | 51.25% | 0.594 | 0.320 | **18.2%** |
-| Ordinal Logistic Regression | Ordinal | 65.51% | 0.536 | 0.362 | 33.6% |
+| Naive Bayes | Nominal | 63.14% | 0.6646 | 0.2322 | 44.4% |
+| Logistic Regression | Nominal | **66.10%** | **0.5315** | 0.3816 | 34.8% |
+| Ridge Regression | Ordinal | 50.34% | 0.6051 | 0.3077 | **18.1%** |
+| Ordinal Logistic Regression | Ordinal | 65.85% | 0.5359 | 0.3713 | 34.8% |
 
 Severe error = the prediction is off by 2 or more stars.
 
