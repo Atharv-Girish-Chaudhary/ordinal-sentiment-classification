@@ -4,7 +4,7 @@
 
 This project compares ordinal and nominal classification approaches for 5-star rating prediction on Amazon Electronics Reviews. We investigate whether treating ratings as ordered (ordinal) rather than unordered (nominal) categories improves model performance, particularly in reducing severe misclassifications.
 
-## 📊 Dataset Overview
+## Dataset Overview
 
 - **Dataset**: Amazon Reviews 2023
 - **Category**: Electronics
@@ -12,7 +12,7 @@ This project compares ordinal and nominal classification approaches for 5-star r
 - **Size**: 18.3M users, 1.6M items, 43.9M reviews
 - **Time Range**: May 1996 - September 2023
 
-## 🚀 Quick Start
+## Quick Start
 
 ### Prerequisites
 
@@ -42,11 +42,11 @@ pip install pandas numpy matplotlib seaborn plotly datasets jupyter
    - `5_Results_Analysis.ipynb` - Compare and analyze results
    - `6_Additional_Visualizations.ipynb` - Generate publication figures
 
-## 🔬 Research Question
+## Research Question
 
 **Do the performance gains from ordinal treatment of 5-star ratings justify the increased model complexity?**
 
-## 📊 Models Compared
+## Models Compared
 
 ### Nominal Models (Unordered Categories)
 1. **Multinomial Naive Bayes** - Baseline nominal classifier
@@ -56,21 +56,21 @@ pip install pandas numpy matplotlib seaborn plotly datasets jupyter
 1. **Ridge Regression** - Treats ratings as continuous, rounds to nearest integer
 2. **Ordinal Logistic Regression** - Threshold-based approach using cumulative probabilities
 
-## 📈 Key Results
+## Key Results
 
 - **Best Accuracy**: Logistic Regression (Nominal) - 65.95%
 - **Lowest MAE**: Logistic Regression (Nominal) - 0.5337
 - **Lowest Severe Error**: Ridge Regression (Ordinal) - 18.1%
 - **Key Finding**: Ordinal models reduce severe misclassifications (18-35% vs 35-44% for nominal)
 
-## 🔍 Key Findings
+## Key Findings
 
 1. **Ordinal models reduce severe errors**: Ridge Regression achieves 18.1% severe error rate vs 35-44% for nominal models
 2. **Adjacent rating confusion**: 55-82% of errors occur between adjacent ratings (e.g., 4↔5 stars)
 3. **Class imbalance challenge**: 5-star reviews dominate (~60%), affecting minority class performance
 4. **MAE improvement**: Ordinal methods show better mean absolute error, indicating better ordinal structure understanding
 
-## 📁 Project Structure
+## Project Structure
 
 ```
 ├── README.md                         # Project documentation
@@ -100,7 +100,7 @@ pip install pandas numpy matplotlib seaborn plotly datasets jupyter
     └── Video_Script.md               # Presentation video script
 ```
 
-## 🛠️ Technical Details
+## Technical Details
 
 ### Data Sources
 - **Reviews Data**: User reviews with ratings, text, timestamps, and metadata
@@ -119,7 +119,7 @@ pip install pandas numpy matplotlib seaborn plotly datasets jupyter
 - Data cleaning and preprocessing
 - Statistical analysis and correlation studies
 
-## 🔮 Future Enhancements
+## Future Enhancements
 
 1. **Sentiment Analysis**: Analyze review text for deeper insights
 2. **Product Clustering**: Group similar products based on review patterns
@@ -127,13 +127,13 @@ pip install pandas numpy matplotlib seaborn plotly datasets jupyter
 4. **Competitive Analysis**: Compare electronics subcategories
 5. **User Segmentation**: Identify user personas based on behavior
 
-## 📚 References
+## References
 
 - [Amazon Reviews 2023 Dataset](https://amazon-reviews-2023.github.io/)
 - [McAuley Lab, UCSD](https://cseweb.ucsd.edu/~jmcauley/)
 - [Hugging Face Datasets](https://huggingface.co/datasets)
 
-## 📄 Citation
+## Citation
 
 If you use this analysis or the dataset, please cite:
 
@@ -146,7 +146,7 @@ If you use this analysis or the dataset, please cite:
 }
 ```
 
-## 🤝 Contributing
+## Contributing
 
 Feel free to contribute to this project by:
 - Adding new visualizations
@@ -154,11 +154,11 @@ Feel free to contribute to this project by:
 - Adding support for other product categories
 - Enhancing documentation
 
-## 📝 License
+## License
 
 This project is for educational and research purposes. Please refer to the original dataset license for usage terms.
 
-## 📞 Contact
+## Contact
 
 For questions or suggestions about this analysis, please open an issue in this repository.
 
