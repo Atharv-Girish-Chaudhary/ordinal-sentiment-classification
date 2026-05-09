@@ -146,12 +146,7 @@ raw_data/
 models/
 
 # Output files (keep structure, ignore generated files)
-results/figures/*.png
-results/figures/*.jpg
-results/figures/*.jpeg
 results/figures/*.gif
-results/figures/*.svg
-results/tables/*.csv
 
 # Documentation (keep structure, ignore PDFs)
 docs/*.pdf
